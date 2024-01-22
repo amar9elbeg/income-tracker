@@ -1,0 +1,65 @@
+{
+  "name": "income-tracker-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/income-tracker-service",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/income-tracker-service"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/income-tracker-service"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "income-tracker-service:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "income-tracker-service:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "income-tracker-service:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "income-tracker-service:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/income-tracker-service/jest.config.ts",
+        "passWithNoTests": true,
+        "codeCoverage": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}
