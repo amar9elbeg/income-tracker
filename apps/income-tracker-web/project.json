@@ -46,12 +46,16 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/income-tracker-web/jest.config.ts"
+        "jestConfig": "apps/income-tracker-web/jest.config.ts",
+        "codeCoverage": true
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/income-tracker-web/**/*.{ts,tsx,js,jsx}"]
+      }
     }
   },
   "tags": []

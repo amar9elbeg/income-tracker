@@ -1,7 +1,14 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "plugins": [
+    "@nx",
+    "eslint-plugin-unicorn",
+    "no-secrets",
+    "promise",
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -30,6 +37,47 @@
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
       "rules": {}
+    },
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "complexity": ["error", { "max": 3 }]
+      }
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "complexity": ["error", { "max": 2 }]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "plugins": ["spellcheck"],
+      "rules": {
+        "no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "args": "after-used",
+            "argsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ],
+        "no-magic-numbers": [
+          "off",
+          {
+            "ignore": [],
+            "ignoreArrayIndexes": true,
+            "enforceConst": true,
+            "detectObjects": false
+          }
+        ],
+        "no-secrets/no-secrets": "error",
+        "max-lines": ["error", { "max": 160 }],
+        "max-nested-callbacks": ["error", 3],
+        "max-depth": ["error", 4]
+      }
     }
   ]
 }
