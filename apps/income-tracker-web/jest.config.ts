@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export default {
   displayName: 'income-tracker-web',
   preset: '../../jest.preset.js',
@@ -8,4 +9,19 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/income-tracker-web',
+  collectCoverageFrom: [
+    '**/*.tsx',
+    'utils/**/*.ts',
+    'components/**',
+    '!src/app/**/*.tsx',
+    '!specs/**',
+    '!**.d.ts',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/generated.ts',
+    '!**/generated/*.ts',
+    '!*.config.ts',
+    '!graphql/*.ts',
+    '!graphql/resolvers/index.ts',
+  ],
 };

@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
+    "baseUrl": ".",
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -16,7 +17,10 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "paths": {
+      "@components/*": ["src/components/*"]
+    }
   },
   "include": [
     "**/*.ts",
@@ -25,7 +29,8 @@
     "**/*.jsx",
     "../../apps/income-tracker-web/.next/types/**/*.ts",
     "../../dist/apps/income-tracker-web/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
