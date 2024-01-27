@@ -1,0 +1,32 @@
+/* eslint-disable */
+export default {
+  displayName: 'income-tracker-service',
+  preset: '../../jest.preset.js',
+  transform: {
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
+    '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  coverageDirectory: '../../coverage/apps/income-tracker-service',
+  testEnvironment: 'node',
+  collectCoverageFrom: [
+    '*.ts',
+    '**/*.ts',
+    'utils/**/*.ts',
+    '!.next/**/*.ts',
+    '!**.d.ts',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/generated.ts',
+    '!**/generated/*.ts',
+    '*-schema.ts',
+    '!**/*-schema.ts',
+    '*.graphql',
+    '!*.config.ts',
+    '!pages/api/graphql.ts',
+    '!**/page.ts',
+    '!**/graphql.ts',
+    '!**/*.schema.ts',
+    '!**/index.ts',
+  ],
+};
