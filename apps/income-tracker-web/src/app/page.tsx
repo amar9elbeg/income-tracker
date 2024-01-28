@@ -16,7 +16,7 @@ const HomePage = () => {
     checkUserToken();
   }, [router]);
 
-  return <div>Hello world from home page</div>;
+  return <div>Hello world from home page!!</div>;
 };
 
 export default HomePage;
