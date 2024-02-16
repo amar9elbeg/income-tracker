@@ -1,1 +1,3 @@
-export * from './Text-Field';
+export * from './TextField';
+export * from './EmailField';
+export * from './PasswordField';
