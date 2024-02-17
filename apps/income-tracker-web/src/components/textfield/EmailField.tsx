@@ -3,14 +3,6 @@ import { TextField } from './TextField';
 
 export const EmailField: React.FC<TextFieldProps> = (props) => {
   return (
-    <TextField
-      fullWidth
-      placeholder="Email"
-      {...props}
-      helperText={props.helperText}
-      FormHelperTextProps={{
-        error: true,
-      }}
-    />
+    <TextField placeholder="Email" {...props} helperText={props.helperText} />
   );
 };

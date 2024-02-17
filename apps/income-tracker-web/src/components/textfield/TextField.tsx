@@ -14,5 +14,13 @@ const StyledTextField = styled(MuiTextField)<TextFieldProps>(() => ({
 }));
 
 export const TextField: React.FC<TextFieldProps> = (props) => {
-  return <StyledTextField {...props} />;
+  return (
+    <StyledTextField
+      fullWidth
+      FormHelperTextProps={{
+        error: true,
+      }}
+      {...props}
+    />
+  );
 };

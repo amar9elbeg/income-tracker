@@ -1,38 +1,11 @@
 'use client';
 import { LinkButton, SignInButton } from 'src/components/button';
-// import { GeldIcon } from 'src/components/icons';
 import { EmailField, PasswordField } from 'src/components/textfield';
 import { Stack } from '@mui/material';
 import { FormikState, useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import * as yup from 'yup';
 import { Title, Typography } from '@components/typography';
-
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string()
-    .min(8, 'Minimum 8 characters length required')
-    .required('Password is required'),
-});
-
-type FormikHandleSubmitType = {
-  values: { email: string; password: string };
-  resetForm: (
-    // eslint-disable-next-line no-unused-vars
-    nextState?:
-      | Partial<
-          FormikState<{
-            email: string;
-            password: string;
-          }>
-        >
-      | undefined
-  ) => void;
-};
 
 const SignIn = () => {
   const router = useRouter();
@@ -59,8 +32,6 @@ const SignIn = () => {
     resetForm();
   };
 
-  // const handleFormSubmit = () => formik.handleSubmit();
-
   return (
     <>
       <Stack
@@ -68,6 +39,7 @@ const SignIn = () => {
         justifyContent="center"
         alignItems="center"
         px="48px"
+        width="300px"
       >
         <Title>Welcome Back</Title>
         <Typography sx={{ color: '#334155' }}>
@@ -96,3 +68,29 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email('Enter a valid email')
+    .required('Please enter your email'),
+  password: yup
+    .string()
+    .min(8, 'Minimum 8 characters length required')
+    .required('Please enter your password'),
+});
+
+type FormikHandleSubmitType = {
+  values: { email: string; password: string };
+  resetForm: (
+    // eslint-disable-next-line no-unused-vars
+    nextState?:
+      | Partial<
+          FormikState<{
+            email: string;
+            password: string;
+          }>
+        >
+      | undefined
+  ) => void;
+};
