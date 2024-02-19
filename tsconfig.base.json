@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "esModuleInterop": true,
-    "paths": {}
+    "paths": {
+      "@income-tracker/libs": ["libs/src/index.ts"],
+      "@income-tracker/scripts": ["libs/scripts/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
