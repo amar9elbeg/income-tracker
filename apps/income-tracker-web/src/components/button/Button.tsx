@@ -5,7 +5,11 @@ const StyledButton = styled(MuiButton)<ButtonProps>(() => ({
   backgroundColor: '#0166FF',
   textTransform: 'none',
   color: '#ffffff',
-
+  borderRadius: '20px',
+  padding: '16px',
+  fontSize: '20px',
+  fontWeight: 400,
+  lineHeight: '28px',
   '&:hover': {
     backgroundColor: '#0166FF',
     color: '#ffffff',

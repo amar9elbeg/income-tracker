@@ -1,11 +1,11 @@
 'use client';
-import { LinkButton, SignInButton } from 'src/components/button';
-import { EmailField, PasswordField } from 'src/components/textfield';
-import { Stack } from '@mui/material';
+import { Title, Typography } from '@components/typography';
+import { Link, Stack } from '@mui/material';
 import { FormikState, useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { Button } from 'src/components/button';
+import { TextField } from 'src/components/textfield';
 import * as yup from 'yup';
-import { Title, Typography } from '@components/typography';
 
 const SignIn = () => {
   const router = useRouter();
@@ -47,21 +47,32 @@ const SignIn = () => {
         </Typography>
       </Stack>
       <Stack spacing="16px" width="100%">
-        <EmailField
+        <TextField
           value={formik.values.email}
           onChange={formik.handleChange('email')}
+          placeholder="Email"
           helperText={formik.errors.email}
         />
-        <PasswordField
+        <TextField
           value={formik.values.password}
           onChange={formik.handleChange('password')}
           helperText={formik.errors.password}
+          placeholder="Password"
+          type="password"
         />
-        <SignInButton onClick={() => formik.handleSubmit()} />
+        <Button variant="contained" onClick={() => formik.handleSubmit()}>
+          Log In
+        </Button>
       </Stack>
       <Stack direction="row" spacing="12px">
         <Typography>Don’t have account?</Typography>
-        <LinkButton onClick={handleSignUpButton}>Sign up</LinkButton>
+        <Link
+          sx={{ color: '#0166FF', cursor: 'pointer' }}
+          underline="none"
+          onClick={handleSignUpButton}
+        >
+          Sign up
+        </Link>
       </Stack>
     </>
   );
