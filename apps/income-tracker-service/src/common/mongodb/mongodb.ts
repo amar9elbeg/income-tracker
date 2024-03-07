@@ -18,12 +18,6 @@ const connectMongoDB = async () => {
     mongoose.connection.on('disconnected', () => {
       console.log('Database disconnected');
     });
-
-    process.on('SIGINT', async () => {
-      await mongoose.connection.close();
-      console.log('Database connection closed due to termination');
-      process.exit(0);
-    });
   } catch (err) {
     console.log('Database connection error:', err);
     throw err;

@@ -1,8 +1,5 @@
-import { after } from 'node:test';
 import connectMongoDB from '../../src/common/mongodb/mongodb';
 import mongoose from 'mongoose';
-
-// jest.mock('mongoose');
 
 describe('Should test MongoDB connection', () => {
   afterEach(() => {
@@ -12,6 +9,7 @@ describe('Should test MongoDB connection', () => {
 
   it('Should connect to MongoDB successfully', async () => {
     const mockConnection = jest.spyOn(mongoose, 'connect');
+
     mockConnection.mockImplementation();
     await connectMongoDB();
     expect(mockConnection).toHaveBeenCalledTimes(1);
@@ -25,24 +23,45 @@ describe('Should test MongoDB connection', () => {
     await expect(connectMongoDB()).rejects.toThrow('Database connection error');
     expect(mockConnection).toHaveBeenCalledTimes(1);
   });
-});
-describe('Event handler for connected event', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
 
   it('Should log "Database connected"', async () => {
     const mockLog = jest.spyOn(console, 'log');
-    await connectMongoDB(); // Connect to MongoDB to trigger the event handler
+    await connectMongoDB();
 
-    // Simulate the 'connected' event
     mongoose.connection.emit('connected');
+    expect(mockLog).toHaveBeenCalledWith('Database connected successfully');
+  });
 
-    expect(mockLog).toHaveBeenCalledWith('Database connected');
+  it('Should log "Database disconnected"', async () => {
+    const mockLog = jest.spyOn(console, 'log');
+    await connectMongoDB();
+
+    mongoose.connection.emit('disconnected');
+    expect(mockLog).toHaveBeenCalledWith('Database disconnected');
   });
 });
 
-describe('Should test MongoDB connection', () => {
+describe('Event handler for error event', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+    jest.resetAllMocks();
+  });
+
+  it('Should log "Database connection error" when error occurs', async () => {
+    const mockError = jest.spyOn(console, 'error');
+    await connectMongoDB();
+
+    const testError = new Error('Test error');
+    mongoose.connection.emit('error', testError);
+
+    expect(mockError).toHaveBeenCalledWith(
+      'Database connection error:',
+      testError
+    );
+  });
+});
+
+describe('Should throw error when there is no env', () => {
   beforeEach(() => {
     process.env.NEXT_PUBLIC_MONGODB_URI = '';
   });
@@ -50,7 +69,7 @@ describe('Should test MongoDB connection', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('Should throw error when there is not MOGODB URI', async () => {
+  it('Should throw error when there is not MONGODB URI', async () => {
     await expect(connectMongoDB()).rejects.toThrow(
       'Database connection string is not defined'
     );
