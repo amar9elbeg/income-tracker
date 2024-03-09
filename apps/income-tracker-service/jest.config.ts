@@ -19,6 +19,7 @@ export default {
     '!**/vendor/**',
     '!**/generated.ts',
     '!**/generated/*.ts',
+    '!**/models/*.ts',
     '*-schema.ts',
     '!**/*-schema.ts',
     '*.graphql',

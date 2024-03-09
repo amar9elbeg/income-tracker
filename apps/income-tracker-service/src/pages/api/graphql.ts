@@ -3,17 +3,20 @@ import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
 import { ApolloServer } from 'apollo-server-cloud-functions';
 import resolvers from '../../graphql/resolvers';
 import { typeDefs } from '../../graphql/schemas';
+import connectMongoDB from '../../common/mongodb/mongodb';
 
 const server = new ApolloServer({
   schema: buildSubgraphSchema({ typeDefs, resolvers }),
   cache: new InMemoryLRUCache(),
   csrfPrevention: false,
   introspection: true,
-  context: ({ req, res }: { req: Request; res: Response }) => ({
-    headers: req.headers,
-    req,
-    res,
-  }),
+  context: ({ req }: { req: Request }) => {
+    connectMongoDB();
+    const { headers } = req;
+    return {
+      headers,
+    };
+  },
 });
 
 export const config = {
