@@ -42,3 +42,7 @@ Thumbs.db
 
 # Next.js
 .next
+
+yarn.lock
+package-lock.json
+bun.lockb
