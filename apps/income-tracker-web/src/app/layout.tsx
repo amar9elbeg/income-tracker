@@ -1,3 +1,5 @@
+import { ApolloProvider } from 'src/common/graphql/apollo-provider';
+
 export const metadata = {
   title: 'Welcome to income-tracker-web',
 };
@@ -9,7 +11,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ApolloProvider>{children}</ApolloProvider>
+      </body>
     </html>
   );
 }

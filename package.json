@@ -8,11 +8,17 @@
   },
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.8.10",
+    "@apollo/client": "^3.9.6",
     "@apollo/subgraph": "^2.7.0",
     "@apollo/utils.keyvaluecache": "^3.1.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@graphql-codegen/add": "4.0.1",
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/typescript": "4.0.1",
+    "@graphql-codegen/typescript-operations": "4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "4.1.0",
+    "@graphql-codegen/typescript-resolvers": "2.7.10",
     "@mui/material": "^5.15.6",
     "@nx/next": "17.2.8",
     "@types/mongoose": "^5.11.97",
@@ -71,6 +77,6 @@
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "~5.2.2"
+    "typescript": "^5.4.2"
   }
 }
