@@ -18,6 +18,15 @@
         "production": {}
       }
     },
+    "setup": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "graphql-codegen --config apps/income-tracker-web/graphql-codegen.yml"
+        ],
+        "parallel": false
+      }
+    },
     "serve": {
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
@@ -34,7 +43,8 @@
           "buildTarget": "income-tracker-web:build:production",
           "dev": false
         }
-      }
+      },
+      "dependsOn": ["setup"]
     },
     "export": {
       "executor": "@nx/next:export",

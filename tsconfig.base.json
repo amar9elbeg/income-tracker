@@ -17,6 +17,7 @@
     "esModuleInterop": true,
     "paths": {
       "@income-tracker/libs": ["libs/src/index.ts"],
+      "@income-tracker/script": ["libs/script/src/index.ts"],
       "@income-tracker/scripts": ["libs/scripts/src/index.ts"]
     }
   },

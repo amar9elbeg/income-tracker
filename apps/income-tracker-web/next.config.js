@@ -12,6 +12,10 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  env: {
+    SERVICE_ENDPOINT_FOR_CODEGEN:
+      process.env.SERVICE_ENDPOINT_FOR_CODEGEN || '',
+  },
 };
 
 const plugins = [

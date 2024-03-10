@@ -1,0 +1,17 @@
+overwrite: true
+schema: '${SERVICE_ENDPOINT_FOR_CODEGEN}'
+
+documents: './apps/income-tracker-web/src/**/*.graphql'
+
+generates:
+  apps/income-tracker-web/src/common/graphql/generated.ts:
+    config:
+      reactApolloVersion: 3
+      withHOC: true
+      withHooks: true
+    plugins:
+      - add:
+          content: '// @ts-nocheck'
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'

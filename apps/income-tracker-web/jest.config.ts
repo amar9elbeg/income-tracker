@@ -13,6 +13,7 @@ export default {
     '**/*.tsx',
     'utils/**/*.ts',
     'components/**',
+    '!src/common/**/*.tsx',
     '!src/app/**/*.tsx',
     '!specs/**',
     '!**.d.ts',

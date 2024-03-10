@@ -1,8 +1,10 @@
 'use client';
+
 import { Title, Typography } from '@components/typography';
 import { Link, Stack } from '@mui/material';
 import { FormikState, useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
+import { useCreateUserMutation } from 'src/common/graphql/generated';
 import { Button } from 'src/components/button';
 import { TextField } from 'src/components/textfield';
 import * as yup from 'yup';
@@ -41,6 +43,7 @@ const validationSchema = yup.object({
 });
 
 const SignUp = () => {
+  const [createUser] = useCreateUserMutation();
   const router = useRouter();
   const handleSignInButton = () => {
     router.push('/sign-in');
@@ -60,7 +63,16 @@ const SignUp = () => {
     values,
     resetForm,
   }: FormikHandleSubmitType) => {
-    console.log(values);
+    await createUser({
+      variables: {
+        input: {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          currency_type: 'MN',
+        },
+      },
+    });
 
     resetForm();
   };

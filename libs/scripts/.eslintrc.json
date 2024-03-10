@@ -15,7 +15,7 @@
       "rules": {}
     },
     {
-      "files": ["*.json"],
+      "files": ["project.json"],
       "parser": "jsonc-eslint-parser",
       "rules": {
         "@nx/dependency-checks": "error"
