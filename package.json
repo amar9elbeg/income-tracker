@@ -17,7 +17,6 @@
     "@nx/next": "17.2.8",
     "@types/mongoose": "^5.11.97",
     "apollo-server-cloud-functions": "^3.13.0",
-    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "formik": "^2.4.5",
