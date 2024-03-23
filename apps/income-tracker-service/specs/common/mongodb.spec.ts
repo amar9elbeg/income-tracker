@@ -1,4 +1,6 @@
-import connectMongoDB from '../../src/common/mongodb/mongodb';
+import connectMongoDB, {
+  connectionSetter,
+} from '../../src/common/mongodb/mongodb';
 import mongoose from 'mongoose';
 
 describe('Should test MongoDB connection', () => {
@@ -8,11 +10,16 @@ describe('Should test MongoDB connection', () => {
   });
 
   it('Should connect to MongoDB successfully', async () => {
-    const mockConnection = jest.spyOn(mongoose, 'connect');
+    const mockMongooseConnect = jest.spyOn(mongoose, 'connect');
 
-    mockConnection.mockImplementation();
+    mockMongooseConnect.mockImplementation();
+
+    const mockLog = jest.spyOn(console, 'log');
+
     await connectMongoDB();
-    expect(mockConnection).toHaveBeenCalledTimes(1);
+
+    expect(mockMongooseConnect).toHaveBeenCalledTimes(1);
+    expect(mockLog).toHaveBeenCalledWith('Database connected successfully');
   });
 
   it('Should throw error inside the catch', async () => {
@@ -29,7 +36,7 @@ describe('Should test MongoDB connection', () => {
     await connectMongoDB();
 
     mongoose.connection.emit('connected');
-    expect(mockLog).toHaveBeenCalledWith('Database connected successfully');
+    expect(mockLog).toHaveBeenCalledWith('Database connected');
   });
 
   it('Should log "Database disconnected"', async () => {
@@ -63,7 +70,7 @@ describe('Event handler for error event', () => {
 
 describe('Should throw error when there is no env', () => {
   beforeEach(() => {
-    process.env.NEXT_PUBLIC_MONGODB_URI = '';
+    process.env.NEXT_PUBLIC_MONGODB_URI = undefined;
   });
 
   afterEach(() => {

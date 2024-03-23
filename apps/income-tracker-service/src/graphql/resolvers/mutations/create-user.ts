@@ -18,6 +18,7 @@ export const createUser = async (_: unknown, { input }: CreateUserProps) => {
 
     const user = await UserModel.create({ ...input, password: hashedPassword });
     return user;
+    
   } catch (err) {
     console.log(err);
   }
