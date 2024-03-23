@@ -1,12 +1,32 @@
 import mongoose from 'mongoose';
 
-const connectMongoDB = async () => {
-  const DATABASE_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
+export const connection = {
+  isConnected: 0,
+};
+
+export const connectionSetter = (dbConnection: typeof mongoose) => {
+  if (dbConnection) {
+    connection.isConnected = dbConnection.connections[0].readyState;
+  }
+};
+
+const DATABASE_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
+
+export const isDatabaseUriAvailable = () => {
   if (!DATABASE_URI)
     throw new Error('Database connection string is not defined');
+};
+
+const connectMongoDB = async () => {
+  if (connection.isConnected) {
+    return;
+  }
+
+  isDatabaseUriAvailable();
 
   try {
-    await mongoose.connect(DATABASE_URI);
+    const dbConnection = await mongoose.connect(DATABASE_URI as string);
+    connectionSetter(dbConnection);
     console.log('Database connected successfully');
 
     mongoose.connection.on('connected', () => {
